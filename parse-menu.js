@@ -3,6 +3,23 @@ var foodDict = { 'Drink': ['Decaf coffee', 'Dark coffee', 'Coffee with cream, su
 
 function renderMenu(meal) {
     menuDate = new Date();
+
+    if(null == meal) {
+        tod = menuDate.getHours();
+        if( tod < 11 ) { //&& dow < 6 && dow > 0) {
+            meal = 'breakfast';
+        }
+        if( tod >=11 && tod < 14 ) { // && dow < 6 && dow > 0) {
+            meal = 'lunch';
+        }
+       
+       
+        if(tod >= 14 ) {
+            meal = 'dinner';
+        }
+  
+    }
+ 
     today = menuDate.toISOString().split('T')[0];
     today = today.replace(/-/g,"");
 
@@ -125,5 +142,4 @@ function getFunMeal() {
 
 
 
-renderMenu("lunch");
-// console.log(getFunMeal());
+renderMenu();
