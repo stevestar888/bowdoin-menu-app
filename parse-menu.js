@@ -71,26 +71,58 @@ function parseMenuHTML(menuString) {
 
     return foodDict;
 }
-
-
+ 
+ 
+/* 
+* called to display/hide the "make me a fun meal" modal
+*/
+window.addEventListener('load', function() {
+	var modal = document.getElementById('funMealModal');
+	var btn = document.getElementById('funMealBtn');
+	var span = document.getElementById('funMealSpan');
+ 
+	// display modal in main window
+	btn.onclick = function() {
+		modal.style.display = 'block';
+	};
+ 
+	// close modal on clicking (x)
+	span.onclick = function() {
+		modal.style.display = 'none';
+	};
+ 
+	// close modal when user clicks on window (outside modal)
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = 'none';
+		}
+	};
+});
+ 
+ 
 function getFunMeal() {
+    console.log("getFunMeal()");
     var preppedMeal = "Your meal is... (in this order):\n\n";
-
+ 
     for (var food in foodDict) {
         if (food === "header" || food === "footer") { // ignore header/footer categories
         } else {
             foodList = foodDict[food];
-
+ 
             //get random num from 0 to foodList.length - 1
             randomItemIdx = Math.floor(Math.random() * (foodList.length - 1));
-
+ 
             preppedMeal += foodList[randomItemIdx];
             preppedMeal += "\n"
         }
     }
-
-    return preppedMeal;
+    
+    $("#fun-meal-box").empty();
+    $("#fun-meal-box").append(preppedMeal);
+    console.log(preppedMeal);
 }
+
+
 
 renderMenu("lunch");
 // console.log(getFunMeal());

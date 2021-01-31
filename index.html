@@ -18,8 +18,21 @@
             </div>
             <div class= "textBox dining_menu" id="mbox"> </div>
         </div>
-        
-        <div><button class="suggButton" onclick="dinner">Give me a suggestion!</button></div>
+        <div class="modal-section">
+            <button class="modal-button suggButton" id="funMealBtn" onclick="getFunMeal()"> 
+                click to get a fun meal :)
+            </button>
+        </div>
+ 
+        <!-- open the pop-up box -->
+        <div id="funMealModal" class="modal">
+            <!-- modal content -->
+            <div class="modal-content">
+                <!-- the &times; = 'x' (multiplication symbol) -->
+                <span id="funMealSpan" class="close" tabindex="1">&times;</span>
+                <div class="modal-text dining_menu" id="fun-meal-box"> Sorry, the meal couldn't be loaded. :( </div>
+            </div>
+        </div>
     </div>
    </body>
   
