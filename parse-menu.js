@@ -1,5 +1,5 @@
 var menuHTML;
-var dishDict = {};
+var dishDict = {'Drink': ['Milk', 'Water', 'Vitamin water', 'Plain o\' water', 'Sparkling water', 'Coca-Cola', 'Root Beer', 'Sprite', 'whatever is in your waterbottle right now']};
 
 function renderMenu() {
     // Get JSON for the menu information from Bowdoin API
