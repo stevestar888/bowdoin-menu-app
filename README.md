@@ -15,7 +15,6 @@ With our shared passion for our college's dining hall food, we decided to create
 
 ## How we built it
 - together
-
 -We called the Bowdoin Menu API and stored each of the items in a dictionary that will be used to create a random meal. We used Java, HTML, CSS for a shell website of the bowdoin dining menu. 
 
 ## Challenges we ran into
