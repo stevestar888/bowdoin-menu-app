@@ -120,7 +120,7 @@ window.addEventListener('load', function() {
  
 function getFunMeal() {
     console.log("getFunMeal()");
-    var preppedMeal = "Your meal is... (in this order):\n\n";
+    var preppedMeal = "Your meal is... (in this order): </br></br>";
  
     for (var food in foodDict) {
         if (food === "header" || food === "footer") { // ignore header/footer categories
@@ -131,7 +131,7 @@ function getFunMeal() {
             randomItemIdx = Math.floor(Math.random() * (foodList.length - 1));
  
             preppedMeal += foodList[randomItemIdx];
-            preppedMeal += "\n"
+            preppedMeal += "</br>"
         }
     }
     
