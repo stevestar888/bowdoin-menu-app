@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
- 
+
 <html>
-   <head>
-       <title> Bowdoin Menu </title>
-       <LINK href="style.css" rel="stylesheet" type="text/css">
-       <h1 id = 'title'> Bowdoin Menu </h1>
-      
-   </head>
-   <body>
-    <div class = 'bigboi'>
-        <div id = 'container'>
-            <div class="meal_button"> 
+
+<head>
+    <title> Bowdoin Menu </title>
+    <LINK href="style.css" rel="stylesheet" type="text/css">
+    <h1 id='title'> Bowdoin Menu </h1>
+</head>
+
+<body>
+    <div class='bigboi'>
+        <div id='container'>
+            <div class="meal_button">
                 <button onclick="renderMenu('breakfast')">Breakfast</button>
                 <button onclick="renderMenu('lunch')">Lunch</button>
                 <button onclick="renderMenu('dinner')">Dinner</button>
             </div>
-            <div class= "textBox dining_menu" id="mbox"> </div>
+            <div class="textBox dining_menu" id="mbox"> </div>
         </div>
+
+        <!-- sticky note for "get a fun meal" -->
         <div class="modal-section">
-            <button class="modal-button suggButton" id="funMealBtn" onclick="getFunMeal()"> 
+            <button class="modal-button suggButton" id="funMealBtn" onclick="getFunMeal()">
                 click to get a fun meal :)
             </button>
         </div>
- 
+
         <!-- open the pop-up box -->
         <div id="funMealModal" class="modal">
             <!-- modal content -->
@@ -34,9 +37,8 @@
             </div>
         </div>
     </div>
-   </body>
-  
-   <script src="parse-menu.js"></script>   
+</body>
+
+<script src="parse-menu.js"></script>
+
 </html>
-
-
