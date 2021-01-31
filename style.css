@@ -1,0 +1,43 @@
+.dining_menu{
+    text-align: center;
+    font-size:20px
+}
+.button {
+    background-color: #535353; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 10px;
+    font-family: "Times New Roman", Times, serif;
+    float: left;
+    height: 200px;
+    position: relative;
+    margin-right:0px;
+  }
+  button:hover {
+    background: #d1d1d1;
+    border: 1px solid #8b8b8b;
+  }
+h1 {
+    text-align: center;
+  }
+  .textBox{
+    width:600px;
+    border-radius: 100px;
+    background-color: rgb(255, 255, 255);
+    border: 5px solid rgb(2, 2, 2);
+    padding: 50px;
+    text-align: center;
+    margin:0 auto;
+    font-family: "Times New Roman", Times, serif;
+    float: left;
+}body  {
+    background-image: url("img/patrick-dempsey.jpg");
+    background-color: #cccccc;
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
