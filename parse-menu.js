@@ -19,7 +19,7 @@ function renderMenu() {
     response.done(function (menu) {
         menuHTML = $(menu).html();
 
-        // $("#mbox").append(menuHTML);
+        $("#mbox").append(menuHTML);
 
         // console.log(menuHTML);
         parseMenuHTML(menuHTML);
