@@ -5,21 +5,22 @@
    <head>
        <title> Bowdoin Menu </title>
        <LINK href="style.css" rel="stylesheet" type="text/css">
-       <h1> Bowdoin Menu </h1>
+       <h1 id = 'title'> Bowdoin Menu </h1>
       
    </head>
    <body>
-       
-    <div id = 'container'>
-        <div class="meal_button"> 
-            <button onclick="bfast">Breakfast</button> 
-            <button onclick="lunch">Lunch</button>
-            <button onclick="dinner">Dinner</button>
+    <div class = 'bigboi'>
+        <div id = 'container'>
+            <div class="meal_button"> 
+                <button onclick="renderMenu('breakfast')">Breakfast</button>
+                <button onclick="renderMenu('lunch')">Lunch</button>
+                <button onclick="renderMenu('dinner')">Dinner</button>
+            </div>
+            <div class= "textBox dining_menu" id="mbox"> </div>
         </div>
-        <div class= "textBox dining_menu" id="mbox"> </div>
+        
+        <div><button class="suggButton" onclick="dinner">Give me a suggestion!</button></div>
     </div>
-       
-       <div><button class="suggButton" onclick="dinner">Give me a suggestion!</button></div>
    </body>
   
    <script src="parse-menu.js"></script>   

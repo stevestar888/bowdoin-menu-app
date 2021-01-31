@@ -25,6 +25,7 @@ function renderMenu(meal) {
     response.done(function (menu) {
         menuHTML = $(menu).html();
 
+        $("#mbox").empty();
         $("#mbox").append(menuHTML);
 
         parseMenuHTML(menuHTML);
@@ -67,7 +68,7 @@ function parseMenuHTML(menuString) {
         // Populate dictionry, example: {key : val} --> soup : [cookies & cream, jam & jelly]
         foodDict[items[0]] = items.slice(1);
     }
-    console.log(foodDict);
+
     return foodDict;
 }
 
@@ -76,18 +77,20 @@ function getFunMeal() {
     var preppedMeal = "Your meal is... (in this order):\n\n";
 
     for (var food in foodDict) {
-        foodList = foodDict[food];
+        if (food === "header" || food === "footer") { // ignore header/footer categories
+        } else {
+            foodList = foodDict[food];
 
-        //get random num from 0 to foodList.length - 1
-        randomItemIdx = Math.floor(Math.random() * foodList.length - 1);
+            //get random num from 0 to foodList.length - 1
+            randomItemIdx = Math.floor(Math.random() * (foodList.length - 1));
 
-        preppedMeal += foodList[randomItemIdx];
-        preppedMeal += "\n"
+            preppedMeal += foodList[randomItemIdx];
+            preppedMeal += "\n"
+        }
     }
 
     return preppedMeal;
 }
 
 renderMenu("lunch");
-
-console.log(getFunMeal());
+// console.log(getFunMeal());
