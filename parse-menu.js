@@ -77,13 +77,14 @@ function parseMenuHTML(menuString) {
 * called to display/hide the "make me a fun meal" modal
 */
 window.addEventListener('load', function() {
-	var modal = document.getElementById('funMealModal');
+    var modal = document.getElementById('funMealModal');
 	var btn = document.getElementById('funMealBtn');
 	var span = document.getElementById('funMealSpan');
  
 	// display modal in main window
 	btn.onclick = function() {
-		modal.style.display = 'block';
+        getFunMeal();
+        modal.style.display = 'block';
 	};
  
 	// close modal on clicking (x)
