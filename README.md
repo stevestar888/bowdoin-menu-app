@@ -1,3 +1,6 @@
+#Visit-website-here
+http://bowdoin-menu-app.rf.gd/?z&i=1
+
 # bowdoin-menu-app
 We built a shell for https://www.bowdoin.edu/dining/menus/index.html
 
