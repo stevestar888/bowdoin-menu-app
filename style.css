@@ -16,8 +16,7 @@
   padding: 10px 24px;
   cursor: pointer;
   text-align: center;
-  font-size: 30px;
-  font-family: "Times New Roman", Times, serif;
+  font-size: 25px;
   transform: rotate(-90deg);
   width: 160px;
   margin-top: 50px;
@@ -31,7 +30,6 @@
   padding: 15px 32px;
   text-align: center;
   font-size: 25px;
-  font-family: "Times New Roman", Times, serif;
   height: 155px;
   width: 155px;
   float: left;
@@ -57,7 +55,6 @@ h1 {
   padding: 50px;
   text-align: center;
   margin:0 auto;
-  font-family: "Times New Roman", Times, serif;
   /* float: left; */
 }
 
@@ -78,7 +75,11 @@ body {
 }
 
 .bigboi {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   align-items: center; /* align vertical */
 }
 
+#title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
