@@ -67,6 +67,7 @@ function parseMenuHTML(menuString) {
         // Populate dictionry, example: {key : val} --> soup : [cookies & cream, jam & jelly]
         foodDict[items[0]] = items.slice(1);
     }
+    console.log(foodDict);
     return foodDict;
 }
 
@@ -88,6 +89,5 @@ function getFunMeal() {
 }
 
 renderMenu("lunch");
-console.log(menuHTML);
-// console.log(foodDict);
-// console.log(getFunMeal());
+
+console.log(getFunMeal());
