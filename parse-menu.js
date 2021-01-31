@@ -1,40 +1,96 @@
-function RenderMenu() {
-    // Get JSON for the menu information
-    ret = $.ajax({
+var menuHTML;
+var foodDict = { 'Drink': ['Decaf coffee', 'Dark coffee', 'Coffee with cream, sugar, honey', 'Tea of choice', 'Iced tea', 'Lemonade', 'Juice of your choice', 'Milk', 'Mineral Water', 'Vitamin water', 'Plain o\' water', 'Sparkling water', 'Coca-Cola', 'Root Beer', 'Sprite', 'whatever is in your waterbottle right now'] };
+
+function renderMenu(meal) {
+    menuDate = new Date();
+    today = menuDate.toISOString().split('T')[0];
+    today = today.replace(/-/g,"");
+
+    diningHall = 49 // 49 = Thorne
+
+    // Get JSON for the menu information from Bowdoin API
+    response = $.ajax({
         type: "POST",
         url: "https://apps.bowdoin.edu/orestes/api.jsp",
         data: {
-            unit: 49, // 49 = Thorne
-            date: 20210131,
-            meal: "lunch",
-            tra: "guide"
+            unit: diningHall, 
+            date: today,
+            meal: meal, //breakfast, lunch, or dinner
+            tra: "guide" //preset (no idea what this is)
         },
         dataType: "html"
     })
-    
-    ret.done(function(menu) { // Loads HTML of the menu from the JSON response text
-        html = "<div id='u"+4949+"' class='unit col-md-6'>"+$(menu).html()+"</div>";
-        html = html.replace("Service Unit:", "Service Unit<br/>");
-        html = html.replace(/\<h3\>/g,'<h4>').replace(/\<\/h3\>/g,'</h4>');
-        html = html.replace('<strong>','<h3>').replace('</strong>','</h3>');
-        html = html.replace('<p class="unit"></p>','');
-        
 
-        html = html.replace('.75rem;','2rem;margin-top:1.5rem;border-top:1px solid #777;display:none;');
-        var pos = html.indexOf('<center>');
-        if (pos > -1) {
-            if (4949 === 48) {
-                html = [html.slice(0,pos), '<h3>Moulton Union Service Unit</h3>', html.slice(pos)].join('');
-            } else {
-                html = [html.slice(0,pos), '<h3>Thorne Hall Service Unit</h3>', html.slice(pos)].join('');
-            }
-            html = html.replace("<center>", '<p>').replace('</center>', '</p>').replace('<em>','').replace('</em>','');
-        }
-            $("#mbox").append(html);
-    
+    // Loads HTML of the menu from the JSON response text 
+    response.done(function (menu) {
+        menuHTML = $(menu).html();
+
+        $("#mbox").empty();
+        $("#mbox").append(menuHTML);
+
+        parseMenuHTML(menuHTML);
     });
-
-    // TODO: parse ret 
 }
 
-RenderMenu()
+/*
+Populates dictionary
+*/
+function parseMenuHTML(menuString) {
+    // Note: SPECIALLY STORE first category & last category!! 
+    // First category is like: `<p class="unit"> <strong>Thorne Hall  <br>  Lunch, 2021-01-31</strong> </p>`
+    // Last category is like: `<p style="font-size:.75rem;color:#999;"> <em> Salad Bar, Steamed Rice ... Menu Subject to Change.</em> </p>
+
+    // pre-process the string for splitting into categories
+    menuString = menuHTML.replace('<p style="font-size:.75rem;color:#999;">', '<h3 style="clear:both;">')
+
+    // 1. Parse menu categories
+    const categories = menuString.split('<h3 style="clear:both;">');
+
+    // DEBUG code (excludes non-categories)
+    // for (let i = 1; i < categories.length - 1; i++) {
+    //     console.log(`Category ${i}: ${categories[i]}`);
+    // }
+
+    foodDict['header'] = categories[0]; // first category (see beginning of func for ex.)
+    foodDict['footer'] = categories[categories.length - 1]; // last category (see beginning of func for ex.)
+
+    // 2. Parse items for each category (except header & footer)
+    for (let catIdx = 1; catIdx < categories.length - 1; catIdx++) {
+        // split each item by span
+        var items = categories[catIdx].split('<span>');
+
+        // replace HTML tags + print test code
+        items[0] = items[0].replace('</h3>', '');
+        for (let itemIdx = 1; itemIdx < items.length; itemIdx++) {
+            items[itemIdx] = items[itemIdx].replace('</span>\n<br>', '');
+            // console.log(`${items[0]}: ${items[itemIdx]}`);
+        }
+        // Populate dictionry, example: {key : val} --> soup : [cookies & cream, jam & jelly]
+        foodDict[items[0]] = items.slice(1);
+    }
+
+    return foodDict;
+}
+
+
+function getFunMeal() {
+    var preppedMeal = "Your meal is... (in this order):\n\n";
+
+    for (var food in foodDict) {
+        if (food === "header" || food === "footer") { // ignore header/footer categories
+        } else {
+            foodList = foodDict[food];
+
+            //get random num from 0 to foodList.length - 1
+            randomItemIdx = Math.floor(Math.random() * (foodList.length - 1));
+
+            preppedMeal += foodList[randomItemIdx];
+            preppedMeal += "\n"
+        }
+    }
+
+    return preppedMeal;
+}
+
+renderMenu("lunch");
+// console.log(getFunMeal());
