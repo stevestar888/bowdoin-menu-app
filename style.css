@@ -17,11 +17,12 @@
   cursor: pointer;
   text-align: center;
   font-size: 30px;
-  font-family: "Tamoha", Times, serif;
+  font-family: "Times, serif";
   width: 160px;
   margin-top: 150px;
   margin-bottom: 0px;
   margin-right: -50px;
+  border-radius: 100% 100% 0% 0%;
   transform: rotate(-90deg);
 }
 

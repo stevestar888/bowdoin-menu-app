@@ -1,5 +1,5 @@
 var menuHTML;
-var foodDict = { 'Drink': ['Decaf coffee', 'Dark coffee', 'Coffee with cream, sugar, honey', 'Tea of choice', 'Iced tea', 'Lemonade', 'Juice of your choice', 'Milk', 'Mineral Water', 'Vitamin water', 'Plain o\' water', 'Sparkling water', 'Coca-Cola', 'Root Beer', 'Sprite', 'whatever is in your waterbottle right now'] };
+var foodDict = {};
 
 function renderMenu(meal) {
     menuDate = new Date();
@@ -67,7 +67,9 @@ function parseMenuHTML(menuString) {
     // for (let i = 1; i < categories.length - 1; i++) {
     //     console.log(`Category ${i}: ${categories[i]}`);
     // }
-
+    
+    // Reset the food dictionary before re-populating it
+    foodDict = { 'Drink': ['Decaf coffee', 'Dark coffee', 'Coffee with cream, sugar, honey', 'Tea of choice', 'Iced tea', 'Lemonade', 'Juice of your choice', 'Milk', 'Mineral Water', 'Vitamin water', 'Plain o\' water', 'Sparkling water', 'Coca-Cola', 'Root Beer', 'Sprite', 'whatever is in your waterbottle right now'] };
     foodDict['header'] = categories[0]; // first category (see beginning of func for ex.)
     foodDict['footer'] = categories[categories.length - 1]; // last category (see beginning of func for ex.)
 
@@ -82,11 +84,9 @@ function parseMenuHTML(menuString) {
             items[itemIdx] = items[itemIdx].replace('</span>\n<br>', '');
             // console.log(`${items[0]}: ${items[itemIdx]}`);
         }
-        // Populate dictionry, example: {key : val} --> soup : [cookies & cream, jam & jelly]
-        foodDict[items[0]] = items.slice(1);
+        // Populate dictionary, example: {key : val} --> soup : [cookies & cream, jam & jelly]
+        foodDict[items[0].trim()] = items.slice(1);
     }
-
-    return foodDict;
 }
  
  
@@ -122,13 +122,24 @@ function getFunMeal() {
     console.log("getFunMeal()");
     var preppedMeal = "Your meal is... (in this order): </br></br>";
  
-    for (var food in foodDict) {
-        if (food === "header" || food === "footer") { // ignore header/footer categories
-        } else {
-            foodList = foodDict[food];
+    for (var category in foodDict) {
+        // ignore header/footer categories
+        if (category != "header" && category != "footer") { 
+            foodList = foodDict[category];
  
-            //get random num from 0 to foodList.length - 1
-            randomItemIdx = Math.floor(Math.random() * (foodList.length - 1));
+            // Select a random food from its category (using num between 0 -> # of items in a category)
+            randomItemIdx = Math.floor(Math.random() * foodList.length);
+
+            console.log(category +"hi");
+            switch(category) {
+                case "Drink": preppedMeal += "💧 Drink: "; break;
+                case "Vegetables": preppedMeal += "🍅 "; break;
+                case "Starches": preppedMeal += "🥔 "; break;
+                case "Soup": preppedMeal += "🍲 "; break;
+                case "Desserts": preppedMeal += "🍪 "; break;
+
+                default: break;
+            }
  
             preppedMeal += foodList[randomItemIdx];
             preppedMeal += "</br>"
@@ -139,7 +150,6 @@ function getFunMeal() {
     $("#fun-meal-box").append(preppedMeal);
     console.log(preppedMeal);
 }
-
 
 
 renderMenu();
